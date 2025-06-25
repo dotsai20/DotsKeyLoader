@@ -1,95 +1,79 @@
---[[
-  Protected Loader by DotsAI 🔒
-  Tier 1 Obfuscation + Anti-Leak Layer
-]]
 
-local _0D0 = "DOTS2025"
-local _0L1 = "https://link-target.net/1364413/pyANZSlm2sqP"
-local _0X2 = "https://raw.githubusercontent.com/depthso/Grow-a-Garden/refs/heads/main/autofarm.lua"
+--[[ Protected & Encoded Loader by DotsAI ]]
 
-local _G3 = game:GetService("CoreGui")
-local _U4 = Instance.new("ScreenGui", _G3)
-_U4.Name = "DOTS_LOADER_"..math.random(1111,9999)
-
-local function __selfDestruct(reason)
-    warn("Loader self-destructed: " .. reason)
-    if _U4 then _U4:Destroy() end
+local function decode(hex)
+    return (hex:gsub("..", function(cc) return string.char(tonumber(cc, 16)) end))
 end
 
-local _W5 = Instance.new("Frame", _U4)
-_W5.Size = UDim2.new(0, 300, 0, 220)
-_W5.Position = UDim2.new(0.5, -150, 0.5, -110)
-_W5.BackgroundColor3 = Color3.fromRGB(15,15,15)
-_W5.BorderSizePixel = 0
+local KEY = decode("444f545332303235")
+local SCRIPT_URL = decode("68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f6465707468736f2f47726f772d612d47617264656e2f726566732f68656164732f6d61696e2f6175746f6661726d2e6c7561")
+local KEY_LINK = decode("68747470733a2f2f6c696e6b2d7461726765742e6e65742f313336343431332f7079414e5a536c6d32737150")
 
-local _S6 = Instance.new("TextLabel", _W5)
-_S6.Size = UDim2.new(1, 0, 0, 35)
-_S6.Text = "🔐 Script Unlocker"
-_S6.Font = Enum.Font.GothamBold
-_S6.TextColor3 = Color3.fromRGB(255,255,255)
-_S6.BackgroundTransparency = 1
-_S6.TextSize = 18
+local gui = Instance.new("ScreenGui", game.CoreGui)
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 300, 0, 220)
+frame.Position = UDim2.new(0.5, -150, 0.5, -110)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
 
-local _I7 = Instance.new("TextBox", _W5)
-_I7.Size = UDim2.new(1, -20, 0, 30)
-_I7.Position = UDim2.new(0, 10, 0, 50)
-_I7.PlaceholderText = "Enter key here"
-_I7.Text = ""
-_I7.Font = Enum.Font.Gotham
-_I7.TextSize = 16
-_I7.TextColor3 = Color3.fromRGB(255,255,255)
-_I7.BackgroundColor3 = Color3.fromRGB(35,35,35)
+local title = Instance.new("TextLabel", frame)
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.Text = "🔒 Enter Script Key"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.BackgroundTransparency = 1
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
 
-local _M8 = Instance.new("TextLabel", _W5)
-_M8.Size = UDim2.new(1, -20, 0, 28)
-_M8.Position = UDim2.new(0, 10, 0, 90)
-_M8.Text = "🔑 Required key to continue."
-_M8.TextColor3 = Color3.fromRGB(200,200,200)
-_M8.Font = Enum.Font.Gotham
-_M8.TextSize = 14
-_M8.BackgroundTransparency = 1
+local textbox = Instance.new("TextBox", frame)
+textbox.Size = UDim2.new(1, -20, 0, 30)
+textbox.Position = UDim2.new(0, 10, 0, 60)
+textbox.PlaceholderText = "Paste your key here"
+textbox.Text = ""
+textbox.Font = Enum.Font.Gotham
+textbox.TextSize = 16
+textbox.TextColor3 = Color3.new(1, 1, 1)
+textbox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 
-local _G9 = Instance.new("TextButton", _W5)
-_G9.Size = UDim2.new(0.5, -12, 0, 30)
-_G9.Position = UDim2.new(0, 10, 0, 140)
-_G9.Text = "🔑 Get Key"
-_G9.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-_G9.TextColor3 = Color3.new(1,1,1)
-_G9.Font = Enum.Font.Gotham
-_G9.TextSize = 16
+local status = Instance.new("TextLabel", frame)
+status.Size = UDim2.new(1, -20, 0, 30)
+status.Position = UDim2.new(0, 10, 0, 100)
+status.Text = "🔑 Get the key to proceed"
+status.TextColor3 = Color3.new(1, 1, 1)
+status.BackgroundTransparency = 1
+status.Font = Enum.Font.Gotham
+status.TextSize = 14
 
-_G9.MouseButton1Click:Connect(function()
-    pcall(function()
-        setclipboard(_0L1)
-        _M8.Text = "📋 Copied! Open browser to get key."
-    end)
+local getKeyButton = Instance.new("TextButton", frame)
+getKeyButton.Size = UDim2.new(0.5, -15, 0, 30)
+getKeyButton.Position = UDim2.new(0, 10, 0, 150)
+getKeyButton.Text = "🔑 Get Key"
+getKeyButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+getKeyButton.TextColor3 = Color3.new(1, 1, 1)
+getKeyButton.Font = Enum.Font.Gotham
+getKeyButton.TextSize = 16
+
+getKeyButton.MouseButton1Click:Connect(function()
+    setclipboard(KEY_LINK)
+    status.Text = "📋 Link copied! Open your browser to get the key."
 end)
 
-local _T0 = Instance.new("TextButton", _W5)
-_T0.Size = UDim2.new(0.5, -12, 0, 30)
-_T0.Position = UDim2.new(0.5, 2, 0, 140)
-_T0.Text = "▶️ Submit"
-_T0.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-_T0.TextColor3 = Color3.new(1,1,1)
-_T0.Font = Enum.Font.GothamBold
-_T0.TextSize = 16
+local submitButton = Instance.new("TextButton", frame)
+submitButton.Size = UDim2.new(0.5, -15, 0, 30)
+submitButton.Position = UDim2.new(0.5, 5, 0, 150)
+submitButton.Text = "▶️ Submit"
+submitButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+submitButton.TextColor3 = Color3.new(1, 1, 1)
+submitButton.Font = Enum.Font.GothamBold
+submitButton.TextSize = 16
 
-local tamperCheck = (debug and debug.getinfo) and true or false
-if not tamperCheck then
-    return __selfDestruct("Tamper detected (debug info missing)")
-end
-
-local start = tick()
-_T0.MouseButton1Click:Connect(function()
-    if tick() - start < 2 then
-        return __selfDestruct("Script triggered too fast (bot or injection)")
-    end
-    if _I7.Text == _0D0 then
-        _M8.Text = "✅ Key accepted! Loading..."
+submitButton.MouseButton1Click:Connect(function()
+    if textbox.Text == KEY then
+        status.Text = "✅ Key accepted! Loading script..."
         wait(1)
-        _U4:Destroy()
-        loadstring(game:HttpGet(_0X2))()
+        gui:Destroy()
+        loadstring(game:HttpGet(SCRIPT_URL))()
     else
-        _M8.Text = "❌ Wrong key. Use 'Get Key' to retrieve it."
+        status.Text = "❌ Invalid key. Use 'Get Key' to obtain it."
     end
 end)
